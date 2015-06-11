@@ -4,7 +4,8 @@
 angularjs启动方式有两种，一种是自动启动，第二种是手动启动
 
 
-####[自动启动](http://127.0.0.1:8080/bootstrap/bootstrap-auto-1.html)
+####自动启动
+[点我](http://127.0.0.1:8080/bootstrap/bootstrap-auto-1.html)
 
 ####手动启动
 * [页面存在单个app](http://127.0.0.1:8080/bootstrap/bootstrap-manual-1.html)
