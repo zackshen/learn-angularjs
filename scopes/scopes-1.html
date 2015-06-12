@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Learn Angularjs</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <script src="../bower_components/angularjs/angular.js"></script>
+    </head>
+    <body ng-app="demo" ng-controller="ProgrammerController">
+        <ul>
+            <li ng-repeat="programmer in programmers">{{programmer}}</li>
+        </ul>
+
+        <ul ng-controller="LanguageController">
+            <li ng-repeat="language in languages">{{language}}</li>
+        </ul>
+
+    </body>
+    <script>
+        angular.module("demo", [])
+        .controller("ProgrammerController", function($scope) {
+            $scope.programmers = [
+                "Michael Abrash",
+                "Scott Adams",
+                "Leonard Adleman",
+                "Alfred Aho",
+                "JJ Allaire",
+                "Andrei Alexandrescu",
+                "Paul Allen",
+                "Eric Allman",
+                "Marc Andreessen",
+                "Jeremy Ashkenas",
+                "Bill Atkinson"
+            ];
+
+            console.log('in ProgrammerController root scope id is', $scope.$root.$id);
+            console.log('ProgrammerController scope id is', $scope.$id);
+        })
+        .controller("LanguageController", function($scope) {
+            $scope.languages = [
+                'Python',
+                'Javascript',
+                'Java',
+                'Php',
+                'C++',
+                'Go'
+            ];
+            console.log('in LanguageController root scope id is', $scope.$root.$id);
+            console.log('LanguageController scope id is', $scope.$id);
+            console.log("LanguageController scope's parent scope id is", $scope.$parent.$id);
+        });
+    </script>
+</html>

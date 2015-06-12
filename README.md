@@ -1,6 +1,8 @@
-#Learn Angular
+Learn Angular
+=========
 
-## 准备环境
+准备环境
+--------
 node
 
 npm
@@ -13,34 +15,23 @@ bower
     bower install --save angularjs
 
 
-## Hello World
-学习一样新东西必备的[hello world](http://127.0.0.1:8080/hello-world/hello.html)
+Hello World
+--------
+[hello world](http://127.0.0.1:8080/hello-world/hello.html)
 
 ## Guide
-
-* [controllers](controllers/README.md)
-
-* [databinding](databinding/README.md)
-
-* [denpendency-injection](denpendency-injection/README.md)
-
-* [directives](directives/README.md)
-
-* [e2e-test](e2e-test/README.md)
-
-* [filters](filters/README.md)
+--------
 
 * [hello-world](hello-world/README.md)
-
-* [modules](modules/README.md)
-
-* [providers](providers/README.md)
-
-* [scopes](scopes/README.md)
-
-* [services](services/README.md)
-
-* [unit-test](unit-test/README.md)
-
 * [bootstrap](bootstrap/README.md)
-
+* [scopes](scopes/README.md)
+* [controllers](controllers/README.md)
+* [databinding](databinding/README.md)
+* [directives](directives/README.md)
+* [providers](providers/README.md)
+* [services](services/README.md)
+* [denpendency-injection](denpendency-injection/README.md)
+* [filters](filters/README.md)
+* [modules](modules/README.md)
+* [unit-test](unit-test/README.md)
+* [e2e-test](e2e-test/README.md)
