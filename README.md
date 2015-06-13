@@ -9,10 +9,12 @@ npm
 
 	npm install -g bower
     npm install -g serve-static
+    npm install -g karma
     
 bower
  
     bower install --save angularjs
+    bower install --save angular-mocks
 
 
 Hello World
@@ -33,5 +35,3 @@ Hello World
 * [denpendency-injection](denpendency-injection/README.md)
 * [filters](filters/README.md)
 * [modules](modules/README.md)
-* [unit-test](unit-test/README.md)
-* [e2e-test](e2e-test/README.md)
