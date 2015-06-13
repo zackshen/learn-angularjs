@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Learn Angularjs</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <script src="../bower_components/angularjs/angular.js"></script>
+    </head>
+    <body ng-app="eventDemo" ng-controller="ParentController">
+
+        <span>Recieved From Child Events {{count}} Times</span>
+        <button ng-click="broadcastEvent()">Parent</button>
+
+        <div ng-controller="ChildController1">
+            <span>Child2 Recieved From Parent Events {{count}} Times</span>
+            <button ng-click="emitEvent()">Child</button>
+        </div>
+
+        <div ng-controller="ChildController2">
+            <span>Child2 Recieved From Parent Events {{count}} Times</span>
+            <button ng-click="emitEvent()">Child</button>
+        </div>
+
+    </body>
+    <script>
+        angular.module("eventDemo", [])
+        .controller("ParentController", function($scope) {
+            $scope.count = 0;
+            $scope.$on('ChildEvent', function() {
+                $scope.count += 1;
+            })
+            $scope.broadcastEvent = function() {
+                $scope.$broadcast('ParentEvent');
+            }
+        })
+        .controller("ChildController1", function($scope) {
+            $scope.count = 0;
+            $scope.$on('ParentEvent', function() {
+                $scope.count += 1;
+            })
+            $scope.emitEvent = function() {
+                $scope.$emit('ChildEvent');
+            }
+        })
+        .controller("ChildController2", function($scope) {
+            $scope.count = 0;
+            $scope.$on('ParentEvent', function() {
+                $scope.count += 1;
+            })
+            $scope.emitEvent = function() {
+                $scope.$emit('ChildEvent');
+            }
+        });
+    </script>
+</html>
