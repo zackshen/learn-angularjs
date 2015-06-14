@@ -22,8 +22,7 @@ describe('ScopesController', function(){
         expect(childScope.count).toBe(0);
     });
 
-
-    it('emit event, parent should received , count should be 1', function() {
+    it('emit event, parent should received , count should be 11', function() {
         childScope.emitEvent('ChildEvent');
         expect(parentScope.count).toBe(1)
         expect(childScope.count).toBe(0);
@@ -32,4 +31,15 @@ describe('ScopesController', function(){
         }
         expect(parentScope.count).toBe(11);
     });
+
+    it('broadcast event, child should received , count should be 11', function() {
+        parentScope.broadcastEvent('ChildEvent');
+        expect(parentScope.count).toBe(0)
+        expect(childScope.count).toBe(1);
+        for (var i=0; i < 10; i++) {
+            childScope.broadcastEvent('ParentEvent');
+        }
+        expect(childScope.count).toBe(11);
+    });
+
 });
