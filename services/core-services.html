@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Learn Angularjs</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <script src="../bower_components/angularjs/angular.js"></script>
+        <script src="./core-services.js"></script>
+    </head>
+    <body ng-app="serviceDemo">
+        <div ng-controller="coreServiceController">
+            <ul>
+                <li ng-repeat="book in books">{{book.name}} | $ {{book.price}}</li>
+            </ul>
+        </div>
+    </body>
+</html>

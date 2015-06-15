@@ -1,0 +1,7 @@
+[
+    {"name":"JAVA", "price":100},
+    {"name":"Python", "price":130},
+    {"name":"Javascript", "price":100},
+    {"name":"C++", "price":140},
+    {"name":"Vim", "price":90}
+]
