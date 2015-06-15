@@ -16,6 +16,10 @@ bower
     bower install --save angularjs
     bower install --save angular-mocks
 
+runserver
+
+    static
+
 
 Hello World
 --------
