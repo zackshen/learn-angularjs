@@ -17,6 +17,7 @@ module.exports = function(config) {
         'bower_components/angularjs/angular.js',
         'bower_components/angular-mocks/angular-mocks.js',
         'scopes/scope-event.js',
+        'services/custom-service.js',
         'tests/unit-test/**/*Spec.js'
     ],
 

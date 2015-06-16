@@ -36,6 +36,13 @@ angular.module('customServiceDemo', ['common.services'])
             $scope.books = books;
         });
     };
+    $scope.getAllBooks = function() {
+        Books.list().then(function(books) {
+            $scope.books = books;
+            $log.info(books);
+        });
+    };
+
     Books.list().then(function(books) {
         $scope.books = books;
         $log.info(books);
