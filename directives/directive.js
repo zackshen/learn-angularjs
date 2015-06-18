@@ -1,4 +1,8 @@
 var app = angular.module('myApp', []);
+// load template into cache
+app.run(function($templateCache) {
+    $templateCache.put("dropdown.tpl", "<select><option>10</option><<option>20</option></select>");
+});
 // custom directives
 // clock
 app.directive('clock', ['$log', '$interval',function($log, $interval) {
@@ -22,5 +26,12 @@ app.directive('clock', ['$log', '$interval',function($log, $interval) {
 app.directive('complexHugeDirective', function() {
     return {
         templateUrl: "./huge.tpl"
+    }
+});
+
+// load template from cache
+app.directive('dropDownList', function() {
+    return {
+        templateUrl: "dropdown.tpl"
     }
 });
