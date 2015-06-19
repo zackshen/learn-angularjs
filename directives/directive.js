@@ -5,6 +5,7 @@ app.run(function($templateCache) {
 });
 // custom directives
 // clock
+// restrict: element
 app.directive('clock', ['$log', '$interval',function($log, $interval) {
     return {
         scope: {},
@@ -33,5 +34,46 @@ app.directive('complexHugeDirective', function() {
 app.directive('dropDownList', function() {
     return {
         templateUrl: "dropdown.tpl"
+    }
+});
+
+// restrict: attribute
+app.directive('colors', function() {
+    return {
+        restrict:'A',
+        link: function(scope, element, attrs) {
+            var c = 0;
+            var colors = attrs.colors.split(',');
+            element.bind('mouseover', function() {
+                c+=1;
+                element.css('color', colors[c%colors.length]);
+            });
+        }
+    }
+});
+
+// restrict: class
+app.directive('myClass', function() {
+    return {
+        restrict:'C',
+        scope: {}, //这里使用独立scope，因为下面的directive的link方法里会给scope一个相同的属性info，会覆盖这个directive的info
+        template: '<h1>{{info}}</h1>',
+        link: function(scope, element, attrs) {
+            scope.info = attrs.myClass;
+        }
+    }
+});
+
+
+// restrict: comment
+app.directive('myComment', function() {
+    return {
+        restrict:'M',
+        scope: {},
+        replace:true,
+        template: '<h3>{{info}}</h3>',
+        link: function(scope, element, attrs) {
+            scope.info = attrs.myComment;
+        }
     }
 });
