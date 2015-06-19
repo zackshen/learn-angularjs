@@ -2,7 +2,9 @@ var app = angular.module('myApp', []);
 // load template into cache
 app.run(function($templateCache) {
     $templateCache.put("dropdown.tpl", "<select><option>10</option><<option>20</option></select>");
+    $templateCache.put("unIsolate.tpl", "<div><input type='text' ng-model='something'/><span>{{something}}</span></div>")
 });
+
 // custom directives
 // clock
 // restrict: element
@@ -75,5 +77,21 @@ app.directive('myComment', function() {
         link: function(scope, element, attrs) {
             scope.info = attrs.myComment;
         }
+    }
+});
+
+// 没有采用独立scope的directive
+app.directive('unIsolateScope', function() {
+    return {
+        restrict: 'AE',
+        templateUrl: 'unIsolate.tpl'
+    }
+});
+// 采用独立scope的directive
+app.directive('isolateScope', function() {
+    return {
+        scope: {},
+        restrict: 'AE',
+        templateUrl: 'unIsolate.tpl'
     }
 });

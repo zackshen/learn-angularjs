@@ -42,3 +42,24 @@ directive有四种形式, A(attribute), E(Element), C(Class), M(Comment)
 ```
 
 ###directive中的scope
+
+不是独立作用域, 会导致你输入的时候，其余所有绑定该对象的内容都会跟着变化
+```html
+    <un-isolate-scope></un-isolate-scope>
+    <un-isolate-scope></un-isolate-scope>
+```
+```javascript
+    return {
+        restrict: 'AE',
+        templateUrl: 'unIsolate.tpl'
+    }
+```
+
+独立的作用域, 很简单，加一个scope:{}的属性就好了
+```javascript
+    return {
+        restrict: 'AE',
+        scope: {},
+        templateUrl: 'unIsolate.tpl'
+    }
+```
