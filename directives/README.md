@@ -41,7 +41,7 @@ directive有四种形式, A(attribute), E(Element), C(Class), M(Comment)
     <span></span>
 ```
 
-###directive中的scope
+###scope
 
 不是独立作用域, 会导致你输入的时候，其余所有绑定该对象的内容都会跟着变化
 ```html

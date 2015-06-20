@@ -5,6 +5,17 @@ app.run(function($templateCache) {
     $templateCache.put("unIsolate.tpl", "<div><input type='text' ng-model='something'/><span>{{something}}</span></div>")
 });
 
+// controller
+app.controller("directiveController", function($scope) {
+    $scope.pageInfo = {
+        currentPage : 1,
+        pageCount : 10
+    };
+    $scope.selectPage = function(page) {
+        alert("选中了第"+page+"页");
+    }
+});
+
 // custom directives
 // clock
 // restrict: element
@@ -95,3 +106,56 @@ app.directive('isolateScope', function() {
         templateUrl: 'unIsolate.tpl'
     }
 });
+
+//分页器实现
+
+app.directive('paginator', function() {
+
+    return {
+        restrict: 'E',
+        scope: {
+            pageCount: '=', // 和外层的controller中得scope属性进行双向绑定
+            currentPage: '=',
+            selectPage: '&onSelectPage'
+        },
+        replace: true,
+        templateUrl: './paginator.tpl',//模板使用的是bootstrap的nav, 修改成angular语法的tpl
+        link: function(scope, element, attrs) {
+            scope.$watch("pageCount", function(pageCount) {
+                scope.pages = []
+                for (var i=0; i < scope.pageCount; i++) {
+                    scope.pages.push(i+1);
+                }
+                scope.gotoPage(scope.currentPage);
+            });
+            scope.noPrev = function() {
+                return scope.currentPage <= 1;
+            }
+            scope.noNext = function() {
+                return scope.currentPage >= scope.pageCount;
+            }
+            scope.prevPage = function() {
+                scope.gotoPage(scope.currentPage-1);
+            }
+            scope.nextPage = function() {
+                scope.gotoPage(scope.currentPage+1);
+            }
+            scope.gotoPage = function(page) {
+                if (page <= 1) {
+                    scope.currentPage = 1;
+                } else if (page >= scope.pageCount) {
+                    scope.currentPage = scope.pageCount;
+                } else {
+                    scope.currentPage = page;
+                }
+                //这里传递的参数结构比较特殊
+                scope.selectPage({'page':scope.currentPage});
+            }
+            scope.isCurrentPage = function(page) {
+                return scope.currentPage == page;
+            }
+        }
+    }
+
+});
+

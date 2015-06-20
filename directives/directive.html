@@ -10,7 +10,7 @@
         <script src="../bower_components/moment/min/moment.min.js"></script>
         <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css""/>
     </head>
-    <body ng-app="myApp">
+    <body ng-app="myApp" ng-controller="directiveController">
         <clock refresh="1"></clock>
         <complex-huge-directive></complex-huge-directive>
         <drop-down-list></drop-down-list>
@@ -30,8 +30,10 @@
             <isolate-scope></isolate-scope>
             <isolate-scope></isolate-scope>
         </div>
-
-
+        
+        <span>当前第{{pageInfo.currentPage}}页 / 总共{{pageInfo.pageCount}}页</span>
+        尝试改变总页数: <input type="number" min="3" max="30" ng-model="pageInfo.pageCount" />
+        <paginator page-count="pageInfo.pageCount" current-page="pageInfo.currentPage" on-select-page="selectPage(page)"></paginator>
     </body>
     <script type="text/javascript" src="./directive.js"></script>
 </html>
