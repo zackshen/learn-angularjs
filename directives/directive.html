@@ -16,8 +16,9 @@
         <drop-down-list></drop-down-list>
         <input type="text" colors="red,blue,yellow" value="Any body here?"/>
         <span class="my-class: hello;"></span>
+
         <!--directive: myComment world-->
-        <span></span>
+        <!--<span></span>-->
 
         <div>
             <p>unIsolateScope</p>
@@ -34,6 +35,11 @@
         <span>当前第{{pageInfo.currentPage}}页 / 总共{{pageInfo.pageCount}}页</span>
         尝试改变总页数: <input type="number" min="3" max="30" ng-model="pageInfo.pageCount" />
         <paginator page-count="pageInfo.pageCount" current-page="pageInfo.currentPage" on-select-page="selectPage(page)"></paginator>
+
+        <datagrid datasource="users" headers="['First Name', 'Last Name', 'Username']">
+            <paginator page-count="5" current-page="1" page-size="5"></paginator>
+        </datagrid>
+
     </body>
     <script type="text/javascript" src="./directive.js"></script>
 </html>

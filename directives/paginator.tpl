@@ -12,4 +12,5 @@
             </a>
         </li>
     </ul>
+    <div ng-transclude></div>
 </nav>

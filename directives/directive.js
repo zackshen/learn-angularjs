@@ -6,14 +6,35 @@ app.run(function($templateCache) {
 });
 
 // controller
-app.controller("directiveController", function($scope) {
+app.controller("directiveController", function($scope, $log) {
+    $scope.selectPage = function(page) {
+        //alert("选中了第"+page+"页");
+        $log.debug("选中了第"+page+"页");
+    };
+    $scope.users = [
+        {'seq': 1,'firstName': 'Mark', 'lastName': 'Otto', 'userName': '@mdo'},
+        {'seq': 2,'firstName': 'Jacob', 'lastName': 'Thornton', 'userName': '@fat'},
+        {'seq': 3,'firstName': 'Larry', 'lastName': 'the Bird', 'userName': '@twitter'},
+        {'seq': 4,'firstName': 'Zack', 'lastName': 'Shen', 'userName': '@zack'},
+        {'seq': 5,'firstName': 'Wenddy', 'lastName': 'Wang', 'userName': '@wenddy'},
+        {'seq': 6,'firstName': 'Felix', 'lastName': 'Zhu', 'userName': '@felix'},
+        {'seq': 7,'firstName': 'Timmy', 'lastName': 'Yuan', 'userName': '@timmy'},
+        {'seq': 8,'firstName': 'Brain', 'lastName': 'Zhang', 'userName': '@brain'},
+        {'seq': 9,'firstName': 'Tony', 'lastName': 'Li', 'userName': '@tony'},
+        {'seq': 10,'firstName': 'Jasper', 'lastName': 'Li', 'userName': '@jasper'},
+        {'seq': 11,'firstName': 'Shirly', 'lastName': 'Hu', 'userName': '@shirly'},
+        {'seq': 12,'firstName': 'Eva', 'lastName': 'Jiang', 'userName': '@eva'},
+        {'seq': 13,'firstName': 'Jeff', 'lastName': 'Xu', 'userName': '@jeff'},
+        {'seq': 14,'firstName': 'Mike', 'lastName': 'Zhao', 'userName': '@mike'},
+        {'seq': 15,'firstName': 'Jacob', 'lastName': 'Du', 'userName': '@jacob'},
+        {'seq': 16,'firstName': 'William', 'lastName': 'Cai', 'userName': '@william'},
+        {'seq': 17,'firstName': 'Vincent', 'lastName': 'Ye', 'userName': '@vicent'},
+        {'seq': 18,'firstName': 'Max', 'lastName': 'Zhou', 'userName': '@max'},
+    ];
     $scope.pageInfo = {
         currentPage : 1,
         pageCount : 10
     };
-    $scope.selectPage = function(page) {
-        alert("选中了第"+page+"页");
-    }
 });
 
 // custom directives
@@ -112,15 +133,17 @@ app.directive('isolateScope', function() {
 app.directive('paginator', function() {
 
     return {
-        restrict: 'E',
+        restrict: 'AE',
+        require: '?^datagrid',
         scope: {
             pageCount: '=', // 和外层的controller中得scope属性进行双向绑定
             currentPage: '=',
+            pageSize: '=',
             selectPage: '&onSelectPage' //回调方法，和外层通信
         },
-        replace: true,
+        transclude: true,
         templateUrl: './paginator.tpl',//模板使用的是bootstrap的nav, 修改成angular语法的tpl
-        link: function(scope, element, attrs) {
+        link: function(scope, element, attrs, controller) {
             scope.$watch("pageCount", function(pageCount) {
                 scope.pages = []
                 for (var i=0; i < scope.pageCount; i++) {
@@ -150,6 +173,9 @@ app.directive('paginator', function() {
                 }
                 //这里传递的参数结构比较特殊
                 scope.selectPage({'page':scope.currentPage});
+                if (controller) {
+                    controller.refresh(scope.currentPage, scope.pageSize);
+                }
             }
             scope.isCurrentPage = function(page) {
                 return scope.currentPage == page;
@@ -158,3 +184,26 @@ app.directive('paginator', function() {
     }
 });
 
+// combine directives
+// directive: datagrid
+app.directive('datagrid', function() {
+    var _this = {};
+    return {
+        restrict: 'AE',
+        transclude: true,
+        templateUrl: './table.tpl',
+        scope: {
+            records: '=datasource',
+            headers: '='
+        },
+        link: function(scope, element, attrs) {
+            _this.records = scope.records;
+        },
+        controller: function($scope) {
+            this.refresh = function(currentPage, pageSize) {
+                var newRecords = _this.records.slice().splice((currentPage-1)*pageSize, pageSize);
+                $scope.records = newRecords;
+            }
+        }
+    };
+});
