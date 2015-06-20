@@ -116,7 +116,7 @@ app.directive('paginator', function() {
         scope: {
             pageCount: '=', // 和外层的controller中得scope属性进行双向绑定
             currentPage: '=',
-            selectPage: '&onSelectPage'
+            selectPage: '&onSelectPage' //回调方法，和外层通信
         },
         replace: true,
         templateUrl: './paginator.tpl',//模板使用的是bootstrap的nav, 修改成angular语法的tpl
@@ -156,6 +156,5 @@ app.directive('paginator', function() {
             }
         }
     }
-
 });
 

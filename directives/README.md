@@ -1,5 +1,7 @@
 ##directives
 
+[demo](http://127.0.0.1:8080/directives/directive.html)
+
 ###restrict
 
 directive有四种形式, A(attribute), E(Element), C(Class), M(Comment)
@@ -62,4 +64,9 @@ directive有四种形式, A(attribute), E(Element), C(Class), M(Comment)
         scope: {},
         templateUrl: 'unIsolate.tpl'
     }
+```
+
+###自定义指令(分页器)
+```html
+    <paginator page-count="pageInfo.pageCount" current-page="pageInfo.currentPage" on-select-page="selectPage(page)"></paginator>
 ```
