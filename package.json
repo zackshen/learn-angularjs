@@ -4,7 +4,9 @@
     "jasmine-core": "^2.3.4",
     "karma": "^0.12.36",
     "karma-jasmine": "^0.3.5",
+    "karma-ng-html2js-preprocessor": "^0.1.2",
     "karma-phantomjs-launcher": "^0.2.0",
-    "moment": "^2.10.3"
+    "moment": "^2.10.3",
+    "ng-html2js": "^2.0.0"
   }
 }

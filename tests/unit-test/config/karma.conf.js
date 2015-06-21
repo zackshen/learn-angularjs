@@ -18,16 +18,26 @@ module.exports = function(config) {
         'bower_components/angular-mocks/angular-mocks.js',
         'scopes/scope-event.js',
         'services/custom-service.js',
-        'tests/unit-test/**/*Spec.js'
+        'directives/directive.js',
+        'tests/unit-test/**/*Spec.js',
+
+        'directives/**/*.tpl'
     ],
 
     // list of files to exclude
     exclude: [
     ],
 
+    plugins: [
+        'karma-phantomjs-launcher',
+        'karma-jasmine',
+        'karma-ng-html2js-preprocessor'
+    ],
+
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+        '/directives/**/*.tpl': ['ng-html2js']
     },
 
     // test results reporter to use
@@ -38,10 +48,8 @@ module.exports = function(config) {
     // web server port
     port: 9876,
 
-
     // enable / disable colors in the output (reporters and logs)
     colors: true,
-
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG

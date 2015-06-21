@@ -1,4 +1,4 @@
-var app = angular.module('myApp', []);
+var app = angular.module('directiveApp', []);
 // load template into cache
 app.run(function($templateCache) {
     $templateCache.put("dropdown.tpl", "<select><option>10</option><<option>20</option></select>");
@@ -142,7 +142,7 @@ app.directive('paginator', function() {
             selectPage: '&onSelectPage' //回调方法，和外层通信
         },
         transclude: true,
-        templateUrl: './paginator.tpl',//模板使用的是bootstrap的nav, 修改成angular语法的tpl
+        templateUrl: '/directives/paginator.tpl',//模板使用的是bootstrap的nav, 修改成angular语法的tpl
         link: function(scope, element, attrs, controller) {
             scope.$watch("pageCount", function(pageCount) {
                 scope.pages = []
