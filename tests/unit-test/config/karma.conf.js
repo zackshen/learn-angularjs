@@ -28,11 +28,11 @@ module.exports = function(config) {
     exclude: [
     ],
 
-    plugins: [
-        'karma-phantomjs-launcher',
-        'karma-jasmine',
-        'karma-ng-html2js-preprocessor'
-    ],
+    // plugins: [
+    //     'karma-phantomjs-launcher',
+    //     'karma-jasmine',
+    //     'karma-ng-html2js-preprocessor'
+    // ],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
