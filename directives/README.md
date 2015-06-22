@@ -70,3 +70,9 @@ directive有四种形式, A(attribute), E(Element), C(Class), M(Comment)
 ```html
     <paginator page-count="pageInfo.pageCount" current-page="pageInfo.currentPage" on-select-page="selectPage(page)"></paginator>
 ```
+
+
+###directive unit test
+
+[paginator](./tests/unit-test/directives/directiveSpec.js)
+
