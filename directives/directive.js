@@ -60,7 +60,7 @@ app.directive('clock', ['$log', '$interval',function($log, $interval) {
 // laad template from server
 app.directive('complexHugeDirective', function() {
     return {
-        templateUrl: "./huge.tpl"
+        templateUrl: "./huge.html.tpl"
     }
 });
 
@@ -142,7 +142,7 @@ app.directive('paginator', function() {
             selectPage: '&onSelectPage' //回调方法，和外层通信
         },
         transclude: true,
-        templateUrl: '/directives/paginator.tpl',//模板使用的是bootstrap的nav, 修改成angular语法的tpl
+        templateUrl: 'directives/paginator.html.tpl',//模板使用的是bootstrap的nav, 修改成angular语法的tpl
         link: function(scope, element, attrs, controller) {
             scope.$watch("pageCount", function(pageCount) {
                 scope.pages = []
@@ -191,7 +191,7 @@ app.directive('datagrid', function() {
     return {
         restrict: 'AE',
         transclude: true,
-        templateUrl: './table.tpl',
+        templateUrl: 'directives/table.html.tpl',
         scope: {
             records: '=datasource',
             headers: '='

@@ -20,24 +20,33 @@ module.exports = function(config) {
         'services/custom-service.js',
         'directives/directive.js',
         'tests/unit-test/**/*Spec.js',
-
-        'directives/**/*.tpl'
+        '**/*.html.tpl'
     ],
 
     // list of files to exclude
     exclude: [
     ],
 
-    // plugins: [
-    //     'karma-phantomjs-launcher',
-    //     'karma-jasmine',
-    //     'karma-ng-html2js-preprocessor'
-    // ],
+
+    ngHtml2JsPreprocessor: {
+
+        stripSufix: '.tpl',
+
+        // or define a custom transform function
+        cacheIdFromPath: function(filepath) {
+            return filepath;
+        },
+
+        // setting this option will create only a single module that contains templates
+        // from all the files, so you can load them all with module('foo')
+        moduleName: 'templates'
+    },
+
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        '/directives/**/*.tpl': ['ng-html2js']
+        '**/*.html.tpl': ['ng-html2js']
     },
 
     // test results reporter to use
