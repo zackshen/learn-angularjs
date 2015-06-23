@@ -71,6 +71,15 @@ directive有四种形式, A(attribute), E(Element), C(Class), M(Comment)
     <paginator page-count="pageInfo.pageCount" current-page="pageInfo.currentPage" on-select-page="selectPage(page)"></paginator>
 ```
 
+###scope(@)
+单向绑定
+
+###scope(=)
+双向绑定
+
+###scope(&)
+父作用域的回调方法
+
 
 ###directive unit test
 

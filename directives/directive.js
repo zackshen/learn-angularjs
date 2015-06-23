@@ -35,6 +35,12 @@ app.controller("directiveController", function($scope, $log) {
         currentPage : 1,
         pageCount : 10
     };
+    $scope.modelA = 10;
+    $scope.modelB = 'hello world';
+    $scope.modelC = 1;
+    $scope.alertScopeAnd = function(value) {
+        alert(value);
+    }
 });
 
 // custom directives
@@ -142,7 +148,7 @@ app.directive('paginator', function() {
             selectPage: '&onSelectPage' //回调方法，和外层通信
         },
         transclude: true,
-        templateUrl: 'directives/paginator.html.tpl',//模板使用的是bootstrap的nav, 修改成angular语法的tpl
+        templateUrl: '/directives/paginator.html.tpl',//模板使用的是bootstrap的nav, 修改成angular语法的tpl
         link: function(scope, element, attrs, controller) {
             scope.$watch("pageCount", function(pageCount) {
                 scope.pages = []
@@ -191,7 +197,7 @@ app.directive('datagrid', function() {
     return {
         restrict: 'AE',
         transclude: true,
-        templateUrl: 'directives/table.html.tpl',
+        templateUrl: '/directives/table.html.tpl',
         scope: {
             records: '=datasource',
             headers: '='
@@ -204,6 +210,48 @@ app.directive('datagrid', function() {
                 var newRecords = _this.records.slice().splice((currentPage-1)*pageSize, pageSize);
                 $scope.records = newRecords;
             }
+        }
+    };
+});
+
+
+// scope:@
+app.directive('scopeAt', function() {
+    return {
+        restrict: 'E',
+        template: '<h1>scope @ : {{scopeAtModel}}</h1><input type="text" ng-model="scopeAtModel" />',
+        scope: {
+            scopeAtModel: '@'
+        }
+    };
+});
+
+// scope:=
+app.directive('scopeEqual', function() {
+    return {
+        restrict: 'E',
+        template: '<h1>scope = : {{scopeEqualModel}}</h1><input type="text" ng-model="scopeEqualModel" />',
+        scope: {
+            scopeEqualModel: '='
+        }
+    };
+});
+
+// scope:&
+app.directive('scopeAnd', function() {
+    return {
+        restrict: 'E',
+        template: '<h1>scope & : {{scopeAndModel}}</h1><input type="number" ng-model="scopeAndModel" />',
+        scope: {
+            scopeCallback: '&',
+            scopeAndModel: '='
+        },
+        link: function(scope, element, attrs) {
+            scope.$watch('scopeAndModel', function(value) {
+                if (value && value > 10) {
+                    scope.scopeCallback({'val': value});
+                }
+            });
         }
     };
 });

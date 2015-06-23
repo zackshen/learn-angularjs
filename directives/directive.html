@@ -40,6 +40,24 @@
             <paginator page-count="5" current-page="1" page-size="5"></paginator>
         </datagrid>
 
+        <div>
+            <input type="text" ng-model="modelA" />
+            <scope-at scope-at-model="{{modelA}}"></scope-at>
+        </div>
+
+        <br/>
+        <div>
+            <input type="text" ng-model="modelB" />
+            <scope-equal scope-equal-model="modelB"></scope-equal>
+        </div>
+
+
+        <br/>
+        <div>
+            if the number is greater than 10 <input type="number" ng-model="modelC" />
+            <scope-and scope-callback="alertScopeAnd(val)" scope-and-model="modelC"></scope-and>
+        </div>
+
     </body>
     <script type="text/javascript" src="./directive.js"></script>
 </html>
