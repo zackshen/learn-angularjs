@@ -19,7 +19,7 @@ module.exports = function(config) {
         'scopes/scope-event.js',
         'services/custom-service.js',
         'directives/directive.js',
-        'tests/unit-test/**/*Spec.js',
+        'tests/unit/**/*Spec.js',
         '**/*.html.tpl'
     ],
 
@@ -34,7 +34,8 @@ module.exports = function(config) {
 
         // or define a custom transform function
         cacheIdFromPath: function(filepath) {
-            return filepath;
+            console.log('cached template', filepath);
+            return "/" + filepath;
         },
 
         // setting this option will create only a single module that contains templates

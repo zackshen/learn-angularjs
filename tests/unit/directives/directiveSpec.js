@@ -4,7 +4,7 @@ describe("directive: paginator", function() {
 
     beforeEach(module('directiveApp'));
     beforeEach(module('templates'));
-    beforeEach(inject(function($compile, $rootScope) {
+    beforeEach(inject(function($compile, $rootScope, $templateCache) {
         element = angular.element('<paginator page-count="pageCount" current-page="currentPage"></paginator>');
         $scope = $rootScope;
         $scope.pageCount = 5;
@@ -13,7 +13,7 @@ describe("directive: paginator", function() {
         $scope.$digest();
         lis = function() {
             return element.find('li');
-        }
+        };
     }));
 
     it("paginator init, paginator buttons count should be 7", function() {
