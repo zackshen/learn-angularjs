@@ -1,42 +1,46 @@
 var app = angular.module("providerApp", []);
 
 // Value
-app.value("token", "abcdef1234567890");
-app.value("idPrefix", "myId:");
+app.value("appName", "itunes music search");
 
-// factory
-app.factory("clientId", function() {
-    return '11230456';
-});
-app.factory('tokenService', ['clientId', function(clientId) {
-    var secret = window.localStorage.getItem('providerApp.secret')||"bbbccc";
-    var apiToken = clientId + ':' + secret;
-    return apiToken.toUpperCase();
-}]);
+app.factory("musicService", ['$http', '$q', function($http, $q) {
+    var baseUrl = "https://itunes.apple.com/search?term=";
+    var suffixUrl = "&callback=JSON_CALLBACK"
+    var _artist = '';
 
-// Service
-app.factory('idGenerator', ['idPrefix', function(idPrefix) {
-    var generator = function(prefix, initValue) {
-        var _this = this;
-        _this.val = initValue;
-        this.next = function() {
-            return prefix + (++_this.val);
-        };
-    }
-    return new generator(idPrefix, 0);
-}]);
+    var makeUrl = function() {
+        return baseUrl + _artist + suffixUrl;
+    };
 
-app.controller('providerController', ['$scope', '$interval', 'token', 'tokenService', 'idGenerator', function($scope, $interval, tokenValue, tokenService, idGenerator) {
-    $scope.tokenValue = tokenValue;
-    $scope.tokenValue2 = tokenService;
-    $scope.generator = 0;
+    return {
 
-    stop = $interval(function() {
-        $scope.generator = idGenerator.next();
-        var val = idGenerator.val;
-        if (val > 10) {
-            $interval.cancel(stop);
+        setArtist: function(artist) {
+            _artist = artist;
+        },
+
+        query: function() {
+            var defered = $q.defer();
+            $http({
+                method: 'JSONP',
+                url: makeUrl(),
+            }).success(function(data) {
+                defered.resolve(data);
+            }).error(function() {
+                defered.reject("query music on itunes fail.");
+            });
+            return defered.promise;
         }
-    }, 1000);
+    };
+}]);
 
+app.controller("musicSearchController", ['$scope', 'appName', 'musicService', function($scope, appName, musicsService) {
+    $scope.appName = appName;
+    $scope.artist = '';
+    $scope.musices = [];
+    $scope.search = function() {
+        musicsService.setArtist($scope.artist);
+        musicsService.query().then(function(data) {
+            $scope.musices = data.results;
+        });
+    }
 }]);

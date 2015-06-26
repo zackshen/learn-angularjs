@@ -7,13 +7,20 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <script src="../bower_components/angularjs/angular.js"></script>
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css""/>
     </head>
     <body ng-app="providerApp">
 
-        <div ng-controller="providerController">
-            <h1>TokenValue: {{tokenValue}}</h1>
-            <h1>TokenService: {{tokenValue2}}</h1>
-            <h1>TokenService: {{generator}}</h1>
+        <div ng-controller="musicSearchController">
+            <h1>{{appName}}</h1>
+
+            <input type="text" ng-model="artist"/><button ng-click="search()" class="btn btn-primary">Search</button>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="music in musices">
+                    <div>{{music.artistName}}</div>
+                    <img src="{{music.artworkUrl100}}">
+                </li>
+            </ul>
         </div>
 
     </body>
